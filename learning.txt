@@ -1,0 +1,14 @@
+constexpr
+noexcept
+enum vs class enum
+abstract types, concrete types
+virtual function with =0
+initializer_list
+explicit constructor
+override function
+unique_ptr
+const Vector &v vs Vector &v
+rvalue, lvalue
+copy symantic, move symantic
+Copy Elision
+explicit class method function
