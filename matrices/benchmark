@@ -1,5 +1,10 @@
 CPU: Ryzen 5 7430
 Optimization: 3
+Memory:
+  System RAM: total: 16 GiB available: 15.01 GiB used: 5.8 GiB (38.6%)
+  Device-1: Channel-A DIMM 0 type: DDR4 size: 8 GiB speed: spec: 3200 MT/s
+    actual: 2400 MT/s
+  Device-2: Channel-B DIMM 0 type: DDR4 size: 8 GiB speed: 2400 MT/s
 2000 x 2000 Matrix Multiplication
 
 Single Threaded Good Cache Locality (i, j, k)
