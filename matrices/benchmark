@@ -1,0 +1,58 @@
+CPU: Ryzen 5 7430
+Optimization: 3
+2000 x 2000 Matrix Multiplication
+
+Single Threaded Good Cache Locality (i, j, k)
+0.913s
+Single Threaded Bad Cache Locality (i, k, j)
+9.43s
+
+MultiThreaded Bad Cache Locality (i, k, j) (It is necessary because in case of (i, k, j), multiple threads could access same memory location of matrix_c at the same time)
+2.697s
+
+4000 x 4000 Matrix Multiplication
+Single Threaded Good Cache Locality (i, j, k)
+11.8s
+Single Threaded Bad Cache Locality (i, k, j)
+167s
+MultiThreaded Bad Cache Locality (i, k, j) (It is necessary because in case of (i, k, j), multiple threads could access same memory location of matrix_c at the same time)
+31s
+MultiThreaded good Cache Locality (i, j, k) Parallelized by rows.
+2.5s
+MultiThreaded good Cache Locality (i, j, k) Parallelized by rows -march=znver3
+2.105s
+
+Codes:
+
+// Division by rows (i, j, k)
+void multiply(const Matrix &matrix_a, const Matrix &matrix_b, Matrix &matrix_c, int row_start, int row_end) {
+    for (int i = row_start; i <= row_end; i++) {
+        for (int j = 0; j < cols_a; j++) {
+            for (int k = 0; k < cols_b; k++) {
+                matrix_c[i][k] += matrix_a[i][j] * matrix_b[j][k];
+            }
+        }
+    }
+}
+
+// Division by cols (i, j, k) I don't think can be used with parallelism
+void multiply(const Matrix &matrix_a, const Matrix &matrix_b, Matrix &matrix_c, int col_start, int col_end) {
+    for (int i = 0; i < rows_a; i++) {
+        for (int j = col_start; j <= col_end; j++) {
+            for (int k = 0; k < cols_a; k++) {
+                matrix_c[i][k] += matrix_a[i][j] * matrix_b[j][k];
+            }
+        }
+    }
+}
+
+// Division by cols (i, k, j)
+void multiply(const Matrix &matrix_a, const Matrix &matrix_b, Matrix &matrix_c, int col_start, int col_end) {
+    for (int i = 0; i < rows_a; i++) {
+        for (int k = col_start; k <= col_end; k++) {
+            for (int j = 0; j < cols_a; j++) {
+                matrix_c[i][k] += matrix_a[i][j] * matrix_b[j][k];
+            }
+        }
+    }
+}
