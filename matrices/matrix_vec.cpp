@@ -57,7 +57,7 @@ void multiply(const Matrix &matrix_a, const Matrix &matrix_b, Matrix &matrix_c, 
     }
     for (int i = 0; i < rows_a; i++) {
         for (int k = col_start; k <= col_end; k++) {
-            for (int j = 0; j < cols_a; j++) {
+            for (int j = 0; j < cols_b; j++) {
                 matrix_c[i][k] += matrix_a[i][j] * matrix_b[j][k];
             }
         }

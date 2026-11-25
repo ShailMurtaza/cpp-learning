@@ -44,7 +44,7 @@ void multiply(const Matrix &matrix_a, const Matrix &matrix_b, Matrix &matrix_c, 
 void multiply(const Matrix &matrix_a, const Matrix &matrix_b, Matrix &matrix_c, int col_start, int col_end) {
     for (int i = 0; i < rows_a; i++) {
         for (int j = col_start; j <= col_end; j++) {
-            for (int k = 0; k < cols_a; k++) {
+            for (int k = 0; k < cols_b; k++) {
                 matrix_c[i][k] += matrix_a[i][j] * matrix_b[j][k];
             }
         }
